@@ -1,0 +1,14 @@
+<h1 class="display-5">{{ tabla }}</h1>
+
+<table class="table table-ligth table-hover">
+    <thead>
+        <tr>
+            <th *ngFor="let clave of claves">{{ clave }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of datos">
+            <td *ngFor="let clave of claves">{{ dato[clave] }}</td>
+        </tr>
+    </tbody>
+</table>

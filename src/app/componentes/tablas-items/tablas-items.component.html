@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let items of item">
+        <a [routerLink]="['/tabla', items.tabla]">{{ items.tabla }}</a>
+    </li>
+</ul>

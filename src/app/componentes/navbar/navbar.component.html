@@ -1,0 +1,13 @@
+<!-- As a heading -->
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">{{ config.titulo }}</span>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item" *ngFor="let menu to menu">
+                <a class="nav-link" aria-current="page" href="#">{{ menu.titulo }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
