@@ -1,3 +1,5 @@
-<li class="nav-item" *ngFor="let menu to menu">
-    <a class="nav-link" aria-current="page" href="#">{{ menu.titulo }}</a>
-</li>
+<ul class="nav">
+    <li class="nav-item" *ngFor="let items of menu">
+        <a class="nav-link text-dark hovAnim" [routerLink]="['/',items.url]">{{ items.titulo }}</a>
+    </li>
+</ul>

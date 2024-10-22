@@ -1,5 +1,10 @@
 <app-header></app-header>
-<div class="container">
-    <app-tabla [tabla]="tabla"></app-tabla>
+<div class="container-fluid row">
+    <div class="col-sm-2">
+        <app-tablas-menu></app-tablas-menu>
+    </div>
+    <div class="col-sm-10 overflow-scroll">
+        <app-tabla [tabla]="tabla"></app-tabla>
+    </div>
 </div>
 <app-footer></app-footer>

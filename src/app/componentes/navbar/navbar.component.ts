@@ -8,6 +8,4 @@ import { ConfigModule } from '../../config/config.module';
 })
 export class NavbarComponent {
   public config: ConfigModule = new ConfigModule();
-
-  public menu = this.config.menu;
 }

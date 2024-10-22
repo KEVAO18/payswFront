@@ -1,5 +1,5 @@
-<ul>
-    <li *ngFor="let items of item">
-        <a [routerLink]="['/tabla', items.tabla]">{{ items.tabla }}</a>
+<ul class="overflow-hidden">
+    <li *ngFor="let items of item; let i = index" class="list-unstyled py-2" [id]="'tabla_n'+i">
+        <a class="text-decoration-none text-dark-emphasis" [routerLink]="['/tabla', items.tabla]">{{ items.tabla }}</a>
     </li>
 </ul>

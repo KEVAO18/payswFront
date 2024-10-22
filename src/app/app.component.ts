@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ConfigModule } from './config/config.module';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Paysw2';
+
+  config = new ConfigModule();
+  title = this.config.titulo;
+
 }
