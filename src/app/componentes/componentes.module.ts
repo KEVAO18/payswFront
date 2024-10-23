@@ -9,6 +9,8 @@ import { TablasItemsComponent } from './tablas-items/tablas-items.component';
 import { RouterLink } from '@angular/router';
 import { ConfigModule } from '../config/config.module';
 import { TablasMenuComponent } from './tablas-menu/tablas-menu.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -20,7 +22,9 @@ import { TablasMenuComponent } from './tablas-menu/tablas-menu.component';
     TablaComponent,
     HeaderComponent,
     TablasItemsComponent,
-    TablasMenuComponent
+    TablasMenuComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

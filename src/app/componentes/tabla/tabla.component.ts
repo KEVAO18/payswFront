@@ -19,11 +19,16 @@ export class TablaComponent {
   ngOnInit(): void {
 
     this.ServicioDatos.getData(this.tabla).subscribe(
-      (data: any) => {
+      (data: any[]) => {
         this.datos = data;
-        console.log(this.datos[0]);
 
-        this.claves = Object.keys(this.datos[0]);
+        if(this.datos.length > 0){
+          console.log(this.datos);
+          this.claves = Object.keys(this.datos[0]);
+        }else{
+          console.log('No hay datos');
+          this.claves = [];
+        }
       },
       (error: any) => {
         console.error(error);

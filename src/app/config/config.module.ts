@@ -11,7 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ConfigModule {
 
-  public titulo = 'Modulo 2 - Proyecto Backend C#';
+  public titulo = 'Modulo 2';
+
+  public subTitulo = 'Innovación curricular';
+
+  public describcion = 'Este proyecto es una aplicacion web que consume un API en C#';
 
   public API_URL = 'http://localhost:7058/api/ProyectoBackendCsharp/';
 
