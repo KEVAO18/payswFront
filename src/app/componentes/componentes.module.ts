@@ -11,6 +11,7 @@ import { ConfigModule } from '../config/config.module';
 import { TablasMenuComponent } from './tablas-menu/tablas-menu.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MostrarRegistroComponent } from './mostrar-registro/mostrar-registro.component';
 
 
 
@@ -24,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
     TablasItemsComponent,
     TablasMenuComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    MostrarRegistroComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { RegisterComponent } from './register/register.component';
     TablaComponent,
     HeaderComponent,
     TablasItemsComponent,
-    TablasMenuComponent
+    TablasMenuComponent,
+    MostrarRegistroComponent
   ]
 })
 export class ComponentesModule { }

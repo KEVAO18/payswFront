@@ -12,4 +12,16 @@ export class GetDataByApiService {
   public getData(tabla: any): Observable<any> {
     return this.http.get('http://localhost:7058/api/paysw2/'+tabla);
   }
+
+  public getColumns(tabla: any){
+    return this.http.get('http://localhost:7058/api/paysw2/'+tabla+'/columns/');
+  }
+
+  public getOneData(tabla:any, campo:any, registro: any): Observable<any> {
+    return this.http.get('http://localhost:7058/api/paysw2/'+tabla+'/'+campo+'/'+registro);
+  }
+
+  public getJoinData(tabla: any, joinTables: any, onConditions: any, selectedColumns: any): Observable<any> {
+    return this.http.get('http://localhost:7058/api/paysw2/'+tabla+'/join?'+joinTables+'&'+onConditions+'&'+selectedColumns);
+  }
 }

@@ -8,7 +8,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let dato of datos">
-            <td *ngFor="let clave of claves">{{ dato[clave] }}</td>
+            <td *ngFor="let clave of claves">{{ (dato[clave] != null)? dato[clave] : "Sin Registro" }}</td>
+
+            <!-- columna para eliminar un registro -->
+            <td>
+                <button class="btn btn-outline-danger">Eliminar</button>
+            </td>
         </tr>
     </tbody>
 </table>
