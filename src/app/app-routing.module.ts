@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { TablasComponent } from './paginas/tablas/tablas.component';
 import { LeerComponent } from './paginas/leer/leer.component';
 import { HomeComponent } from './paginas/home/home.component';
+import { EliminarComponent } from './paginas/eliminar/eliminar.component';
+import { loginGuard } from './guardianes/login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'tablas', component: TablasComponent },
-  { path: 'tabla/:tabla', component: LeerComponent },
-  // { path: 'tabla/:tabla/:campo/:registro', component: LeerUnRegistroComponent }
+  { path: 'tablas', component: TablasComponent, canActivate: [loginGuard] },
+  { path: 'tabla/:tabla', component: LeerComponent, canActivate: [loginGuard] }
 ];
 
 @NgModule({

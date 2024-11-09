@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { GetDataByApiService } from '../../../servicios/get-data-by-api.service';
 
 @Component({
   selector: 'app-nuevo-registro',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class NuevoRegistroComponent {
 
+  @Input() tabla!: string;
+
+constructor(private servicioDatos: GetDataByApiService){}
+
+  ngOnInit(): void {
+    
+  }
 }

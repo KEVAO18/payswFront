@@ -12,6 +12,8 @@ import { TablasMenuComponent } from './tablas-menu/tablas-menu.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MostrarRegistroComponent } from './mostrar-registro/mostrar-registro.component';
+import { RegistroTablaComponent } from './registro-tabla/registro-tabla.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -26,12 +28,14 @@ import { MostrarRegistroComponent } from './mostrar-registro/mostrar-registro.co
     TablasMenuComponent,
     LoginComponent,
     RegisterComponent,
-    MostrarRegistroComponent
+    MostrarRegistroComponent,
+    RegistroTablaComponent
   ],
   imports: [
     CommonModule,
     RouterLink,
-    ConfigModule
+    ConfigModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavbarComponent,
@@ -41,7 +45,10 @@ import { MostrarRegistroComponent } from './mostrar-registro/mostrar-registro.co
     HeaderComponent,
     TablasItemsComponent,
     TablasMenuComponent,
-    MostrarRegistroComponent
+    LoginComponent,
+    RegisterComponent,
+    MostrarRegistroComponent,
+    RegistroTablaComponent
   ]
 })
 export class ComponentesModule { }

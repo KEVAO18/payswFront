@@ -17,7 +17,7 @@ export class ConfigModule {
 
   public describcion = 'Este proyecto es una aplicacion web que consume un API en C#';
 
-  public API_URL = 'http://localhost:7058/api/ProyectoBackendCsharp/';
+  public API_URL = 'http://localhost:7058/api/paysw2/';
 
   public API_TABLAS = [
 
@@ -28,10 +28,21 @@ export class ConfigModule {
     { tabla: 'enfoque', url: this.API_URL + 'enfoque', tipo: 1, col_Int: [] },
     { tabla: 'aspecto_normativo', url: this.API_URL + 'aspecto_normativo', tipo: 1, col_Int: [] },
     { tabla: 'practica_estrategia', url: this.API_URL + 'practica_estrategia', tipo: 1, col_Int: [] },
-
-    // http://localhost:7058/api/proyectoEjemplo/programa_ci/join?joinTables=programa&joinTables=car_innovacion&onConditions=programa.id=programa_ci.programa&onConditions=car_innovacion.id=programa_ci.car_innovacion&selectedColumns=programa.nombre%20AS%20Programa&selectedColumns=car_innovacion.nombre%20AS%20Car_innovacion
-
+    { tabla: 'tiposCredenciales', url: this.API_URL + 'tiposcredenciales', tipo: 1, col_Int: [] },
+    { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [] },
+    
     // tablas con fk
+    
+    // ejemplo de la url final http://localhost:7058/api/proyectoEjemplo/programa_ci/join?joinTables=programa&joinTables=car_innovacion&onConditions=programa.id=programa_ci.programa&onConditions=car_innovacion.id=programa_ci.car_innovacion&selectedColumns=programa.nombre%20AS%20Programa&selectedColumns=car_innovacion.nombre%20AS%20Car_innovacion
+    {
+      tabla: 'credenciales', url: this.API_URL + 'credenciales', tipo: 2, col_Int: [
+        {
+          tablasHermanas: ['usuarios', 'tiposCredenciales'],
+          condiciones: ['usuarios.id = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
+          mostrar: ['usuarios.usuario AS usuario', 'tiposCredenciales.tipo AS tipoCredencial']
+        }
+      ]
+    },
     {
       tabla: 'programa_ci', url: this.API_URL + 'programa_ci', tipo: 2, col_Int: [
         {
