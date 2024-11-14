@@ -1,6 +1,6 @@
+import { SessionesService } from './../../servicios/sessiones.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreateDataByApiService } from '../../servicios/create-data-by-api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder, 
-    private authService: CreateDataByApiService,
+    private authService: SessionesService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({

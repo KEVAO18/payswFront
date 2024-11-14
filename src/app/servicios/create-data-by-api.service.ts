@@ -20,19 +20,6 @@ export class CreateDataByApiService {
     );
   }
 
-  public valUserData(tabla: any, datos: any): Observable<any> {
-    return this.http.post(this.api_url+tabla+'/verificar-contrasena', datos, { responseType: 'text' }).pipe(
-      map((response: any) => {
-        if (response === 'Contraseña verificada exitosamente.') {
-          return response;
-        } else {
-          throw new Error('Contraseña incorrecta');
-        }
-      }),
-    catchError(this.handleError)
-    );
-  }
-
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido';
     if (error.error instanceof ErrorEvent) {

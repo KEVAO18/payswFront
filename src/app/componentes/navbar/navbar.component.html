@@ -1,7 +1,20 @@
 <!-- As a heading -->
 <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
+    <div *ngIf="!loggedIn" class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/home']">{{ config.titulo }}</a>
-        <app-nav-item [menu]="config.menu"></app-nav-item>
+        <ul class="nav">
+            <app-nav-item [menu]="config.menuOut"></app-nav-item>
+        </ul>
+    </div>
+    <div *ngIf="loggedIn" class="container-fluid">
+        <a class="navbar-brand">{{ config.titulo }}</a>
+        <ul class="nav">
+            <li class="nav-item">
+            </li>
+            <app-nav-item [menu]="config.menuin"></app-nav-item>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger" (click)="outSession()">Cerrar sesion</a>
+            </li>
+        </ul>
     </div>
 </nav>

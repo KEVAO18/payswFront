@@ -180,11 +180,16 @@ export class ConfigModule {
     }
   ];
 
-  public menu = [
+  public menuOut = [
 
-    { titulo: 'Home', url: 'home' },
-    { titulo: 'Tablas', url: 'tablas' }
-
+    { titulo: 'Home', url: 'home' }
+    
   ];
 
+  public menuin = [
+
+    { titulo: 'Tablas', url: 'tablas' }
+    
+  ];
+    
 }
