@@ -5,10 +5,11 @@ import { LeerComponent } from './paginas/leer/leer.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { EliminarComponent } from './paginas/eliminar/eliminar.component';
 import { loginGuard } from './guardianes/login.guard';
+import { guestGuard } from './guardianes/guest.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [guestGuard] },
   { path: 'tablas', component: TablasComponent, canActivate: [loginGuard] },
   { path: 'tabla/:tabla', component: LeerComponent, canActivate: [loginGuard] }
 ];

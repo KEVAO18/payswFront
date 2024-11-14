@@ -1,24 +1,39 @@
-<div class="card p-4 shadow">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card p-4 shadow">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
             <label for="userName" class="form-label">Nombre de usuario</label>
             <input type="text" class="form-control" id="userName" formControlName="userName" required>
-            <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="text-danger">
-                Please enter a valid username
+            <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched"
+              class="text-danger small mt-1">
+              Por favor, ingrese un nombre de usuario válido.
             </div>
-        </div>
-        <div class="mb-3">
+          </div>
+          <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
-            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
-                Password must be at least 8 characters long
+            <div class="input-group">
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" formControlName="password">
+              <button title="togglePassword" class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
+                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+              </button>
             </div>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger small mt-1">
+              La contraseña debe tener al menos 8 caracteres.
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              {{ isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
+            </button>
+          </div>
+        </form>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+          {{ errorMessage }}
         </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">LogIn</button>
-        </div>
-        <div *ngIf="errorMessage" class="text-danger">
-            {{ errorMessage }}
-        </div>
-    </form>
+      </div>
+    </div>
+  </div>
 </div>

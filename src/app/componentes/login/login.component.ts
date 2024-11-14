@@ -1,41 +1,68 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateDataByApiService } from '../../servicios/create-data-by-api.service';
-import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
+  isLoading = false;
+  showPassword = false;
 
-  constructor(private fb: FormBuilder, private authService: CreateDataByApiService) {
-
+  constructor(
+    private fb: FormBuilder, 
+    private authService: CreateDataByApiService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      userName: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
-
   }
-  
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   onSubmit() {
-  
-    const userd = {
-      "campoUsuario": 'usuario',
-      "campoContrasena": 'Contrasena',
-      "valorUsuario": this.loginForm.get('userName')?.value,
-      "valorContrasena": this.loginForm.get('password')?.value
-    };
+    if (this.loginForm.valid) {
+      this.isLoading = true;
+      this.errorMessage = null;
 
-    console.log(userd);
+      const userData = {
+        campoUsuario: 'usuario',
+        campoContrasena: 'contrasena',
+        valorUsuario: this.loginForm.get('userName')?.value,
+        valorContrasena: this.loginForm.get('password')?.value
+      };
 
-    // si status es 200, entonces se redirige a la página de inicio y se guarda el token en el local storage pero si status es 401, entonces se muestra un mensaje de error
-    this.authService.valUserData('usuarios', userd);
-
+      this.authService.valUserData('usuarios', userData).subscribe({
+        next: (response) => {
+          console.log('Login successful', response);
+          localStorage.setItem('userOnline', userData.valorUsuario);
+          this.router.navigate(['/tablas']);
+          this.errorMessage = 'Todo correcto';
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.errorMessage = 'Usuario o contraseña incorrectos';
+          } else {
+            this.errorMessage = 'Ocurrió un error al iniciar sesión. Por favor, intente de nuevo.';
+          }
+          console.error('Error logging in', error);
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
-
 }

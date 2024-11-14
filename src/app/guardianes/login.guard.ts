@@ -1,5 +1,5 @@
 import { CanActivateFn } from '@angular/router';
 
 export const loginGuard: CanActivateFn = (route, state) => {
-  return true;
+  return (typeof window !== 'undefined' && !!localStorage.getItem('userOnline'));
 };
