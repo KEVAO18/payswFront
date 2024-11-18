@@ -8,6 +8,7 @@ import { EliminarComponent } from './eliminar/eliminar.component';
 import { HomeComponent } from './home/home.component';
 import { TablasComponent } from './tablas/tablas.component';
 import { ComponentesModule } from '../componentes/componentes.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -19,6 +20,7 @@ import { ComponentesModule } from '../componentes/componentes.module';
     EliminarComponent,
     HomeComponent,
     TablasComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

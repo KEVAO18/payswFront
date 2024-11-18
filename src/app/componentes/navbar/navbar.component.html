@@ -9,9 +9,10 @@
     <div *ngIf="loggedIn" class="container-fluid">
         <a class="navbar-brand">{{ config.titulo }}</a>
         <ul class="nav">
-            <li class="nav-item">
-            </li>
             <app-nav-item [menu]="config.menuin"></app-nav-item>
+            <li class="nav-item">
+                <p class="nav-link text-dark hovAnim">{{ userOnline.nombreUsuario }}</p>
+            </li>
             <li class="nav-item">
                 <a class="btn btn-outline-danger" (click)="outSession()">Cerrar sesion</a>
             </li>

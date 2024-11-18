@@ -29,7 +29,7 @@ export class TablaComponent {
 
     this.objetoTabla = this.config.API_TABLAS.find((element: any) => element.tabla == this.tabla);
 
-    if (this.objetoTabla.tipo == 1 || this.objetoTabla.tipo == 4) {
+    if (this.objetoTabla.tipo == 1) {
 
       this.ServicioDatos.getData(this.tabla).subscribe(
         (data: any[]) => {
@@ -82,6 +82,29 @@ export class TablaComponent {
         }
       );
 
+    } else if(this.objetoTabla.tipo == 4){
+
+      //uniendo las columnas a mostrar
+      let selectedColumns: any = this.objetoTabla.col_Int[0].mostrar.map((element: any) => {
+        return 'selectedColumns=' + element;
+      });
+      selectedColumns = selectedColumns.join('&');
+
+      //haciendo la peticion al api
+      this.ServicioDatos.getDataforColums(this.tabla,  selectedColumns).subscribe(
+        (data: any[]) => {
+          this.datos = data;
+
+          if (this.datos.length > 0) {
+            this.claves = Object.keys(this.datos[0]);
+          } else {
+            this.claves = [];
+          }
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
     } else {
       console.error('Tipo de tabla no valido');
     }

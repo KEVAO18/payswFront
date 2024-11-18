@@ -1,3 +1,5 @@
+import { ConfigModule, usuario } from './../../config/config.module';
+import { GetDataByApiService } from './../../servicios/get-data-by-api.service';
 import { SessionesService } from './../../servicios/sessiones.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,9 +16,12 @@ export class LoginComponent {
   isLoading = false;
   showPassword = false;
 
+  public user?: usuario;
+
   constructor(
     private fb: FormBuilder, 
     private authService: SessionesService,
+    private query: GetDataByApiService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -44,9 +49,33 @@ export class LoginComponent {
       this.authService.valUserData('usuarios', userData).subscribe({
         next: (response) => {
           console.log('Login successful', response);
-          localStorage.setItem('userOnline', userData.valorUsuario);
-          this.router.navigate(['/tablas']);
-          this.errorMessage = 'Todo correcto';
+
+          // tablas a unir
+          let joinT: string = "joinTables=usuarios&joinTables=tiposCredenciales";
+
+          // condiciones para unir las tablas
+          let onC: string = "onConditions=usuarios.id=credenciales.usuarios&onConditions=credenciales.tiposCredenciales=tiposCredenciales.id";
+
+          // columnas a mostrar
+          let columns: string = "selectedColumns=usuarios.id as id&selectedColumns=usuarios.usuario as nombreUsuario&selectedColumns=usuarios.nombre as nombre&selectedColumns=usuarios.email as email&selectedColumns=tiposCredenciales.id as idRol";
+
+          let where: string = "whereClause=usuarios.usuario='"+userData.valorUsuario+"'";
+
+          // obteniendo datos de la tabla credenciales
+          this.query.getJoinDataWhere('credenciales', joinT, onC, columns, where).subscribe({
+            next: (response) => {
+              this.user = response[0];
+
+              // se convierte a string para poder almacenar en localStorage
+              localStorage.setItem('userOnline', JSON.stringify(this.user));
+
+              // redirige a la página dashboard
+              this.router.navigate(['/tablas']);
+              
+              this.errorMessage = 'Todo correcto';
+
+            }
+          });
         },
         error: (error) => {
           if (error.status === 401) {

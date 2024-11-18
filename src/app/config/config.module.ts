@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+export interface usuario {
+  id: number;
+  nombreUsuario: string;
+  nombre: string;
+  email: string;
+  idRol: number;
+}
 
 @NgModule({
   declarations: [],
@@ -29,7 +35,16 @@ export class ConfigModule {
     { tabla: 'aspecto_normativo', url: this.API_URL + 'aspecto_normativo', tipo: 1, col_Int: [] },
     { tabla: 'practica_estrategia', url: this.API_URL + 'practica_estrategia', tipo: 1, col_Int: [] },
     { tabla: 'tiposCredenciales', url: this.API_URL + 'tiposcredenciales', tipo: 1, col_Int: [] },
-    { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [] },
+    { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [
+      {
+        mostrar: [
+          'id',
+          'nombre',
+          'usuario',
+          'email'
+          ]
+      } 
+    ] },
     
     // tablas con fk
     
@@ -39,7 +54,13 @@ export class ConfigModule {
         {
           tablasHermanas: ['usuarios', 'tiposCredenciales'],
           condiciones: ['usuarios.id = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
-          mostrar: ['usuarios.usuario AS usuario', 'tiposCredenciales.tipo AS tipoCredencial']
+          mostrar: [
+            'usuarios.id as id',
+            'usuarios.usuario AS usuario',
+            'usuarios.nombre as nombre',
+            'usuarios.email as email',
+            'tiposCredenciales.id as idRol'
+          ]
         }
       ]
     },

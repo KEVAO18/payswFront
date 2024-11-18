@@ -16,6 +16,10 @@ export class GetDataByApiService {
     return this.http.get(this.api_url+tabla);
   }
 
+  public getDataforColums(tabla: any, columnas: any): Observable<any> {
+    return this.http.get(this.api_url+tabla+'/onlyShow?'+columnas);
+  }
+
   public getColumns(tabla: any){
     return this.http.get(this.api_url+tabla+'/columns/');
   }
@@ -30,5 +34,9 @@ export class GetDataByApiService {
 
   public getJoinData(tabla: any, joinTables: any, onConditions: any, selectedColumns: any): Observable<any> {
     return this.http.get(this.api_url+tabla+'/join?'+joinTables+'&'+onConditions+'&'+selectedColumns);
+  }
+
+  public getJoinDataWhere(tabla: any, joinTables: any, onConditions: any, selectedColumns: any, where: any): Observable<any> {
+    return this.http.get(this.api_url+tabla+'/joinwhere?'+joinTables+'&'+onConditions+'&'+selectedColumns+'&'+where);
   }
 }

@@ -1,6 +1,6 @@
 import { SessionesService } from './../../servicios/sessiones.service';
 import { Component } from '@angular/core';
-import { ConfigModule } from '../../config/config.module';
+import { ConfigModule, usuario } from '../../config/config.module';
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +12,23 @@ export class NavbarComponent {
 
   public loggedIn?: boolean;
 
+  public userOnline: usuario;
+
   constructor(private auth: SessionesService){
     this.loggedIn = this.auth.isAuth();
+
+    // traer el userOnline del localStorage y guardarlo en la variable userOnline
+    if(this.loggedIn){
+      this.userOnline = JSON.parse(localStorage.getItem('userOnline') || '{}')
+    }else{
+      this.userOnline = {
+        id: 0,
+        nombreUsuario: '',
+        nombre: '',
+        email: '',
+        idRol: 0
+      };
+    }
   }
 
   public outSession(){
