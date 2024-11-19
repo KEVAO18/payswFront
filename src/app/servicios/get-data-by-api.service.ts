@@ -36,6 +36,10 @@ export class GetDataByApiService {
     return this.http.get(this.api_url+tabla+'/join?'+joinTables+'&'+onConditions+'&'+selectedColumns);
   }
 
+  public getFullData(tabla: any, joinTables: any, onConditions: any, selectedColumns: any): Observable<any> {
+    return this.http.get(this.api_url+'universidad/Fulljoin?'+joinTables+'&'+onConditions+'&'+selectedColumns);
+  }
+
   public getJoinDataWhere(tabla: any, joinTables: any, onConditions: any, selectedColumns: any, where: any): Observable<any> {
     return this.http.get(this.api_url+tabla+'/joinwhere?'+joinTables+'&'+onConditions+'&'+selectedColumns+'&'+where);
   }

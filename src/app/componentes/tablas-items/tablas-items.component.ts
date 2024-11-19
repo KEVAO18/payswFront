@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './tablas-items.component.scss'
 })
 export class TablasItemsComponent {
-  @Input() item!: { tabla: string, url: string }[];
+  @Input() item?: { tabla: string, url: string }[];
   
 }

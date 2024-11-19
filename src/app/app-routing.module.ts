@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [guestGuard] },
   { path: 'tablas', component: TablasComponent, canActivate: [loginGuard] },
+  { path: 'tablas/filtros/:filtro', component: TablasComponent, canActivate: [loginGuard] },
   { path: 'tabla/:tabla', component: LeerComponent, canActivate: [loginGuard] }
 ];
 

@@ -9,6 +9,13 @@ export interface usuario {
   idRol: number;
 }
 
+export interface tabla{
+  tabla: string; 
+  url: string; 
+  tipo: number; 
+  col_Int: any[];
+}
+
 @NgModule({
   declarations: [],
   imports: [
@@ -35,68 +42,15 @@ export class ConfigModule {
     { tabla: 'aspecto_normativo', url: this.API_URL + 'aspecto_normativo', tipo: 1, col_Int: [] },
     { tabla: 'practica_estrategia', url: this.API_URL + 'practica_estrategia', tipo: 1, col_Int: [] },
     { tabla: 'tiposCredenciales', url: this.API_URL + 'tiposcredenciales', tipo: 1, col_Int: [] },
-    { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [
-      {
-        mostrar: [
-          'id',
-          'nombre',
-          'usuario',
-          'email'
-          ]
-      } 
-    ] },
     
     // tablas con fk
     
-    // ejemplo de la url final http://localhost:7058/api/proyectoEjemplo/programa_ci/join?joinTables=programa&joinTables=car_innovacion&onConditions=programa.id=programa_ci.programa&onConditions=car_innovacion.id=programa_ci.car_innovacion&selectedColumns=programa.nombre%20AS%20Programa&selectedColumns=car_innovacion.nombre%20AS%20Car_innovacion
     {
-      tabla: 'credenciales', url: this.API_URL + 'credenciales', tipo: 2, col_Int: [
+      tabla: 'programa', url: this.API_URL + 'programa', tipo: 2, col_Int: [
         {
-          tablasHermanas: ['usuarios', 'tiposCredenciales'],
-          condiciones: ['usuarios.id = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
-          mostrar: [
-            'usuarios.id as id',
-            'usuarios.usuario AS usuario',
-            'usuarios.nombre as nombre',
-            'usuarios.email as email',
-            'tiposCredenciales.id as idRol'
-          ]
-        }
-      ]
-    },
-    {
-      tabla: 'programa_ci', url: this.API_URL + 'programa_ci', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['programa', 'car_innovacion'],
-          condiciones: ['programa.id = programa_ci.programa', 'car_innovacion.id = programa_ci.car_innovacion'],
-          mostrar: ['programa.nombre AS Programa', 'car_innovacion.nombre AS Car_innovacion']
-        }
-      ]
-    },
-    {
-      tabla: 'enfoque_rc', url: this.API_URL + 'enfoque_rc', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['enfoque', 'registro_calificado', 'programa'],
-          condiciones: ['enfoque.id = enfoque_rc.enfoque', 'registro_calificado.codigo = enfoque_rc.registro_calificado', 'programa.id = registro_calificado.programa'],
-          mostrar: ['enfoque.nombre AS Enfoque', 'programa.nombre AS Programa', 'registro_calificado.cant_creditos AS Cantidad_de_creditos']
-        }
-      ]
-    },
-    {
-      tabla: 'aa_rc', url: this.API_URL + 'aa_rc', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['registro_calificado', 'activ_academica', 'programa'],
-          condiciones: ['registro_calificado.codigo = aa_rc.registro_calificado_codigo', 'activ_academica.id = aa_rc.activ_academicas_idcurso', 'programa.id = registro_calificado.programa'],
-          mostrar: ['activ_academica.nombre AS Actividad', 'programa.nombre AS Programa', 'aa_rc.componente AS Componente', 'aa_rc.semestre AS Semestre']
-        }
-      ]
-    },
-    {
-      tabla: 'programa_pe', url: this.API_URL + 'programa_pe', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['programa', 'practica_estrategia'],
-          condiciones: ['programa.id = programa_pe.programa', 'practica_estrategia.id = programa_pe.practica_estrategia'],
-          mostrar: ['programa.nombre as programa', 'practica_estrategia.nombre as practica_estrategia']
+          tablasHermanas: ['facultad'],
+          condiciones: ['facultad.id = programa.facultad'],
+          mostrar: ['programa.id', 'programa.nombre', 'programa.tipo', 'nivel', 'fecha_creacion', 'fecha_cierre', 'numero_cohortes', 'cant_graduados', 'fecha_actualizacion', 'ciudad', 'facultad.nombre AS facultad']
         }
       ]
     },
@@ -115,15 +69,6 @@ export class ConfigModule {
           tablasHermanas: ['docente', 'programa', 'aliado'],
           condiciones: ['docente.cedula = alianza.docente', 'programa.id = alianza.departamento', 'aliado.nit = alianza.aliado'],
           mostrar: ['aliado.razon_social as aliado', 'programa.nombre as departamento', 'fecha_inicio', 'fecha_fin', 'docente.nombres as docente']
-        }
-      ]
-    },
-    {
-      tabla: 'an_programa', url: this.API_URL + 'an_programa', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['aspecto_normativo', 'programa'],
-          condiciones: ['aspecto_normativo.id = an_programa.aspecto_normativo','programa.id = an_programa.programa'],
-          mostrar: ['aspecto_normativo.descripcion as aspecto_normativo', 'programa.nombre as programa']
         }
       ]
     },
@@ -173,15 +118,6 @@ export class ConfigModule {
       ]
     },
     {
-      tabla: 'programa', url: this.API_URL + 'programa', tipo: 2, col_Int: [
-        {
-          tablasHermanas: ['facultad'],
-          condiciones: ['facultad.id = programa.facultad'],
-          mostrar: ['programa.id', 'programa.nombre', 'programa.tipo', 'nivel', 'fecha_creacion', 'fecha_cierre', 'numero_cohortes', 'cant_graduados', 'fecha_actualizacion', 'ciudad', 'facultad.nombre AS facultad']
-        }
-      ]
-    },
-    {
       tabla: 'pasantia', url: this.API_URL + 'pasantia', tipo: 2, col_Int: [
         {
           tablasHermanas: ['programa'],
@@ -190,15 +126,155 @@ export class ConfigModule {
         }
       ]
     },
+
+    // tablas intermedias
     {
-      tabla: 'programa_ac', url: this.API_URL + 'programa_ac', tipo: 2, col_Int: [
+      tabla: 'credenciales', url: this.API_URL + 'credenciales', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['usuarios', 'tiposCredenciales'],
+          condiciones: ['usuarios.id = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
+          mostrar: [
+            'usuarios.usuario AS usuario',
+            'tiposCredenciales.tipo AS Rol'
+          ]
+        }
+      ]
+    },
+    {
+      tabla: 'programa_ci', url: this.API_URL + 'programa_ci', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['programa', 'car_innovacion'],
+          condiciones: ['programa.id = programa_ci.programa', 'car_innovacion.id = programa_ci.car_innovacion'],
+          mostrar: ['programa.nombre AS Programa', 'car_innovacion.nombre AS Car_innovacion']
+        }
+      ]
+    },
+    {
+      tabla: 'programa_ac', url: this.API_URL + 'programa_ac', tipo: 3, col_Int: [
         {
           tablasHermanas: ['programa', 'area_conocimiento'],
           condiciones: ['programa.id = programa_ac.programa', 'area_conocimiento.id = programa_ac.area_conocimiento'],
           mostrar: ['programa.nombre as programa', 'area_conocimiento.gran_area as area_de_conocimiento']
         }
       ]
-    }
+    },
+    {
+      tabla: 'an_programa', url: this.API_URL + 'an_programa', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['aspecto_normativo', 'programa'],
+          condiciones: ['aspecto_normativo.id = an_programa.aspecto_normativo','programa.id = an_programa.programa'],
+          mostrar: ['aspecto_normativo.descripcion as aspecto_normativo', 'programa.nombre as programa']
+        }
+      ]
+    },
+    {
+      tabla: 'programa_pe', url: this.API_URL + 'programa_pe', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['programa', 'practica_estrategia'],
+          condiciones: ['programa.id = programa_pe.programa', 'practica_estrategia.id = programa_pe.practica_estrategia'],
+          mostrar: ['programa.nombre as programa', 'practica_estrategia.nombre as practica_estrategia']
+        }
+      ]
+    },
+    {
+      tabla: 'aa_rc', url: this.API_URL + 'aa_rc', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['registro_calificado', 'activ_academica', 'programa'],
+          condiciones: ['registro_calificado.codigo = aa_rc.registro_calificado_codigo', 'activ_academica.id = aa_rc.activ_academicas_idcurso', 'programa.id = registro_calificado.programa'],
+          mostrar: ['activ_academica.nombre AS Actividad', 'programa.nombre AS Programa', 'aa_rc.componente AS Componente', 'aa_rc.semestre AS Semestre']
+        }
+      ]
+    },
+    {
+      tabla: 'enfoque_rc', url: this.API_URL + 'enfoque_rc', tipo: 3, col_Int: [
+        {
+          tablasHermanas: ['enfoque', 'registro_calificado', 'programa'],
+          condiciones: ['enfoque.id = enfoque_rc.enfoque', 'registro_calificado.codigo = enfoque_rc.registro_calificado', 'programa.id = registro_calificado.programa'],
+          mostrar: ['enfoque.nombre AS Enfoque', 'programa.nombre AS Programa', 'registro_calificado.cant_creditos AS Cantidad_de_creditos']
+        }
+      ]
+    },
+
+
+    // tablas solo admin
+    { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [
+      { 
+        mostrar: [ 
+          'id', 
+          'nombre', 
+          'usuario', 
+          'email'
+        ]
+      } 
+    ] },
+
+    // todas las tablas
+    { tabla: 'all', url: this.API_URL + 'universidad/Fulljoin?', tipo: 5, col_Int: [
+      { 
+        tablasHermanas: [
+          'facultad',
+          'programa',
+          'docente_departamento',
+          'docente',
+          'estudios_realizados',
+          'alianza',
+          'aliado',
+          'proyecto',
+          'producto',
+          'tipo_producto',
+          'palabras_clave',
+          'termino_clave',
+          'aa_proyecto',
+          'area_aplicacion',
+          'ods_proyecto',
+          'objetivo_desarrollo_sostenible',
+          'ac_proyecto',
+          'area_conocimiento',
+          'linea_investigacion',
+          'grupo_investigacion',
+          'semillero',
+          'desarrolla',
+          'reconocimiento',
+          'red_docente',
+          'red'
+        ],
+        condiciones: [
+          'universidad.id = facultad.universidad',
+          'facultad.id = programa.facultad',
+          'programa.id = docente_departamento.departamento',
+          'docente_departamento.docente = docente.cedula',
+          'docente.cedula = estudios_realizados.docente',
+          'programa.id = alianza.departamento',
+          'alianza.aliado = aliado.nit',
+          'programa.id = proyecto.id',
+          'producto.proyecto = proyecto.id',
+          'producto.tipo_producto = tipo_producto.id',
+          'proyecto.id = palabras_clave.proyecto',
+          'palabras_clave.termino_clave = termino_clave.termino',
+          'proyecto.id = aa_proyecto.proyecto',
+          'aa_proyecto.area_aplicacion = area_aplicacion.id',
+          'proyecto.id = ods_proyecto.proyecto',
+          'ods_proyecto.ods = objetivo_desarrollo_sostenible.id',
+          'proyecto.id = ac_proyecto.proyecto',
+          'ac_proyecto.area_conocimiento = area_conocimiento.id',
+          'docente.linea_investigacion_principal = linea_investigacion.id',
+          'universidad.id = grupo_investigacion.universidad',
+          'grupo_investigacion.id = semillero.grupo_investigacion',
+          'docente.cedula = desarrolla.docente AND proyecto.id = desarrolla.proyecto',
+          'docente.cedula = reconocimiento.docente',
+          'docente.cedula = red_docente.docente',
+          'red_docente.red = red.idr'
+        ],
+        mostrar: ['*']
+      }
+    ] }
+
+  ];
+
+  public filtros = [
+    { nombre: 'Sin fk', valor: 1 },
+    { nombre: 'Con fk', valor: 2 },
+    { nombre: 'Intermedias', valor: 3 }
   ];
 
   public menuOut = [

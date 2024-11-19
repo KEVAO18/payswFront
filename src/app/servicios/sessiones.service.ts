@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigModule } from '../config/config.module';
+import { ConfigModule, usuario } from '../config/config.module';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -28,6 +28,12 @@ export class SessionesService {
       }),
     catchError(this.handleError)
     );
+  }
+
+  public isAdmin(): boolean {
+    let userInfo: usuario = JSON.parse(localStorage.getItem('userOnline') || '{}');
+    
+    return (userInfo.idRol == 1)? true : false;
   }
 
   public isAuth(): boolean {
