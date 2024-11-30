@@ -14,6 +14,7 @@ registro: FormGroup;
 
   constructor(private fb: FormBuilder, private crear: CreateDataByApiService){
     this.registro = this.fb.group({
+      docu: ['', Validators.required],
       fullName: ['', Validators.required],
       userName: ['', Validators.required],
       mail: ['', Validators.required],
@@ -23,21 +24,19 @@ registro: FormGroup;
 
   onSubmit(){
     const datos = {
+      "documento": this.registro.get('docu')?.value,
       "nombre": this.registro.get('fullName')?.value,
-      "Contrasena": this.registro.get('Contrasena')?.value,
       "usuario": this.registro.get('userName')?.value,
+      "Contrasena": this.registro.get('Contrasena')?.value,
       "email": this.registro.get('mail')?.value
     }
 
-    console.log(datos);
-
-    this.crear.sendData('usuarios', datos).subscribe(
+    this.crear.sendData('usuarios', datos, 'text').subscribe(
       (response) => {
-        console.log(response);
-        if (response === 'Usuario creado exitosamente.') {
-          console.log('Registro exitoso');
+        if (response === 'Entidad creada exitosamente.') {
+          alert("Ok");
         } else {
-          console.log('Registro fallido');
+          alert("Error, intente de nuevo");
         }
       },
       (error) => {

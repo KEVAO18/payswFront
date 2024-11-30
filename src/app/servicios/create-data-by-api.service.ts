@@ -12,12 +12,22 @@ export class CreateDataByApiService {
 
   constructor(private http: HttpClient) { }
 
-  public sendData(tabla: string, datos: any): Observable<any> {
-    return this.http.post(this.api_url + tabla, datos, { 
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }).pipe(
-      catchError(this.handleError)
-    );
+  public sendData(tabla: string, datos: any, tipoRespuesta = 'json'): Observable<any> {
+    if(tipoRespuesta == 'text'){
+      return this.http.post(this.api_url + tabla, datos, { 
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'text'
+      }).pipe(
+        catchError(this.handleError)
+      );
+    }else{
+      return this.http.post(this.api_url + tabla, datos, { 
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'json'
+      }).pipe(
+        catchError(this.handleError)
+      );
+    }
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -29,7 +39,6 @@ export class CreateDataByApiService {
       // El backend retornó un código de error
       errorMessage = `Código de error ${error.status}, mensaje: ${error.error}`;
     }
-    console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 }

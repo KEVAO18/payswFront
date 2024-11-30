@@ -1,0 +1,31 @@
+<div *ngIf="columns.length > 0; else loading">
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngFor="let col of columns[0]">
+            <div class="form-group">
+                <!-- Usamos getFieldType para determinar el tipo de entrada -->
+                <input [type]="getFieldType(col.tipoDato)" class="form-control my-3" [id]="col.nombre" [formControlName]="col.nombre" placeholder="Ingrese {{ col.nombre }}" required />
+
+                <!-- Mensaje de error -->
+                <div *ngIf="form.get(col.nombre)?.invalid && form.get(col.nombre)?.touched" class="text-danger">
+                    <div *ngIf="form.get(col.nombre)?.hasError('maxlength')">
+                        El campo {{ col.nombre }} excede la longitud máxima de {{ col.longitudMaxima }} caracteres.
+                    </div>
+                    <div *ngIf="form.get(col.nombre)?.hasError('pattern')">
+                        Solo se permiten números en el campo {{ col.nombre }}.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-success" [disabled]="form.invalid">Enviar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Plantilla de carga -->
+<ng-template #loading>
+    <p class="display-6 text-center">Creando Formulario...</p>
+</ng-template>

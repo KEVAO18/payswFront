@@ -1,5 +1,16 @@
 <app-header></app-header>
-<div class="container overflow-x-scroll">
-    <app-tabla [tabla]="tabla"></app-tabla>
+<div class="container ">
+    <div class="row">
+        <div class="col-sm-12 overflow-x-scroll">
+            <app-tabla [tabla]="tabla"></app-tabla>
+        </div>
+    </div>
+    <div *ngIf="this.isAdmin" class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-outline-primary" [routerLink]="['/','tabla','insertar', tabla]">
+                Nuevo dato
+            </a>
+        </div>
+    </div>
 </div>
 <app-footer></app-footer>

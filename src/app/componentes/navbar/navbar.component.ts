@@ -22,7 +22,7 @@ export class NavbarComponent {
       this.userOnline = JSON.parse(localStorage.getItem('userOnline') || '{}')
     }else{
       this.userOnline = {
-        id: 0,
+        documento: 0,
         nombreUsuario: '',
         nombre: '',
         email: '',

@@ -1,3 +1,4 @@
+import { SessionesService } from './../../servicios/sessiones.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,7 +11,11 @@ export class LeerComponent implements OnInit{
 
   tabla: any;
 
-  constructor(private route: ActivatedRoute){}
+  isAdmin: boolean;
+
+  constructor(private route: ActivatedRoute, private sessiones: SessionesService){
+    this.isAdmin = sessiones.isAdmin();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export interface usuario {
-  id: number;
+  documento: number;
   nombreUsuario: string;
   nombre: string;
   email: string;
@@ -200,7 +200,7 @@ export class ConfigModule {
     { tabla: 'usuarios', url: this.API_URL + 'usuarios', tipo: 4, col_Int: [
       { 
         mostrar: [ 
-          'id', 
+          'documento', 
           'nombre', 
           'usuario', 
           'email'
@@ -269,6 +269,41 @@ export class ConfigModule {
       }
     ] }
 
+  ];
+
+  public fkParaFormularios = [
+
+    // tablas con fk
+    { tabla: 'programa', fk: 'facultad', url: this.API_URL + 'facultad', columna: 'nombre' },
+    { tabla: 'docente_departamento', fk: 'docente', url: this.API_URL + 'docente', columna: 'nombres' },
+    { tabla: 'docente_departamento', fk: 'departamento', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'alianza', fk: 'docente', url: this.API_URL + 'docente', columna: 'nombres' },
+    { tabla: 'alianza', fk: 'departamento', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'alianza', fk: 'aliado', url: this.API_URL + 'aliado', columna: 'razon_social' },
+    { tabla: 'premio', fk: 'programa', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'activ_academica', fk: 'disenio', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'registro_calificado', fk: 'programa', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'acreditacion', fk: 'programa', url: this.API_URL + 'programa', columna: 'nombre' },
+    { tabla: 'facultad', fk: 'universidad', url: this.API_URL + 'universidad', columna: 'nombre' },
+    { tabla: 'pasantia', fk: 'programa', url: this.API_URL + 'programa', columna: 'nombre' },
+
+    // tablas intermedias
+    { tabla: 'credenciales', fk: 'usuarios', url: this.API_URL + 'usuarios' },
+    { tabla: 'credenciales', fk: 'tiposCredenciales', url: this.API_URL + 'tiposcredenciales' },
+    { tabla: 'programa_ci', fk: 'programa', url: this.API_URL + 'programa' },
+    { tabla: 'programa_ci', fk: 'car_innovacion', url: this.API_URL + 'car_innovacion' },
+    { tabla: 'programa_ac', fk: 'programa', url: this.API_URL + 'programa' },
+    { tabla: 'programa_ac', fk: 'area_conocimiento', url: this.API_URL + 'area_conocimiento' },
+    { tabla: 'an_programa', fk: 'aspecto_normativo', url: this.API_URL + 'aspecto_normativo' },
+    { tabla: 'an_programa', fk: 'programa', url: this.API_URL + 'programa' },
+    { tabla: 'programa_pe', fk: 'programa', url: this.API_URL + 'programa' },
+    { tabla: 'programa_pe', fk: 'practica_estrategia', url: this.API_URL + 'practica_estrategia' },
+    { tabla: 'aa_rc', fk: 'registro_calificado', url: this.API_URL + 'registro_calificado' },
+    { tabla: 'aa_rc', fk: 'activ_academicas_idcurso', url: this.API_URL + 'activ_academica' },
+    { tabla: 'aa_rc', fk: 'programa', url: this.API_URL + 'programa' },
+    { tabla: 'enfoque_rc', fk: 'enfoque', url: this.API_URL + 'enfoque' },
+    { tabla: 'enfoque_rc', fk: 'registro_calificado', url: this.API_URL + 'registro_calificado' },
+    { tabla: 'enfoque_rc', fk: 'programa', url: this.API_URL + 'programa' }
   ];
 
   public filtros = [

@@ -1,1 +1,19 @@
-<p>crear works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md 10">
+            <div class="card p-4">
+                <h5 class="display-6 text-center">Ingreso nuevo de {{ tabla }}</h5>
+                <app-new-insert [tabla]="tabla"></app-new-insert>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <a class="btn btn-outline-primary" [routerLink]="['/','tabla', tabla]">
+                Volver a la tabla
+            </a>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

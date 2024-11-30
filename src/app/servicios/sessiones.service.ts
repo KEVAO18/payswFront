@@ -16,7 +16,6 @@ export class SessionesService {
     private router: Router
   ) { }
 
-
   public valUserData(tabla: any, datos: any): Observable<any> {
     return this.http.post(this.api_url+tabla+'/verificar-contrasena', datos, { responseType: 'text' }).pipe(
       map((response: any) => {
@@ -30,19 +29,26 @@ export class SessionesService {
     );
   }
 
+  public isLocalStorageAvailable(): boolean {
+    return typeof localStorage !== 'undefined';
+  }
+
   public isAdmin(): boolean {
-    let userInfo: usuario = JSON.parse(localStorage.getItem('userOnline') || '{}');
-    
-    return (userInfo.idRol == 1)? true : false;
+    if (this.isLocalStorageAvailable()) {
+      const userInfo: usuario = JSON.parse(localStorage.getItem('userOnline') || '{}');
+      return userInfo.idRol === 1;
+    }
+    return false;
   }
 
   public isAuth(): boolean {
-    return !!localStorage.getItem('userOnline');
+    return this.isLocalStorageAvailable() && !!localStorage.getItem('userOnline');
   }
 
   public logOut(): void {
-    localStorage.removeItem('userOnline');
-
+    if (this.isLocalStorageAvailable()) {
+      localStorage.removeItem('userOnline');
+    }
     this.router.navigate(['/']);
   }
 

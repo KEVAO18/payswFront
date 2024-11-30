@@ -1,13 +1,16 @@
 <app-header></app-header>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12 col-md-3">
+		<div class="col-sm-12 col-md-3 mt-2">
 			<div class="list-group">
-				<a *ngFor="let tipo of config.filtros" class="list-group-item list-group-item-action" aria-current="true" [routerLink]="['/tablas/filtros', tipo.valor]">{{ tipo.nombre }}</a>
-				<a *ngIf="this.isAdmin" class="list-group-item list-group-item-action" aria-current="true" [routerLink]="['/tablas/filtros/4']">Solo Admin</a>
+				<a [class.active]="filtro == tipo.valor" *ngFor="let tipo of config.filtros" class="list-group-item list-group-item-action" aria-current="true" [routerLink]="['/tablas/filtros', tipo.valor]">{{ tipo.nombre }}</a>
+				<a [class.active]="filtro == 4" *ngIf="this.isAdmin" class="list-group-item list-group-item-action" aria-current="true" [routerLink]="['/tablas/filtros/4']">Solo Admin</a>
+			</div>
+			<div class="card p-2 my-2" *ngIf="this.isAdmin">
+				<app-register></app-register>
 			</div>
 		</div>
-		<div class="col-sm-12 col-md-9">
+		<div class="col-sm-12 col-md-9 mt-2">
 			<div class="card p-4 shadow">
 				<app-tablas-menu [filtro]="filtro"></app-tablas-menu>
 			</div>

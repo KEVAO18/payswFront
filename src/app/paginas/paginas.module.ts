@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { TablasComponent } from './tablas/tablas.component';
 import { ComponentesModule } from '../componentes/componentes.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -21,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HomeComponent,
     TablasComponent,
     DashboardComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule,

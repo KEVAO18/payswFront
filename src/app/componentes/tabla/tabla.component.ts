@@ -25,6 +25,18 @@ export class TablaComponent {
 
   constructor(private auth: SessionesService, private ServicioDatos: GetDataByApiService, private serviciosDelete: DeleteDataByApiService) { }
 
+  borrarRegistro(tabla: string, campo: string, pk: string) {
+    this.serviciosDelete.deleteData(tabla, campo, pk).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.ngOnInit();
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
   ngOnInit(): void {
 
     this.objetoTabla = this.config.API_TABLAS.find((element: any) => element.tabla == this.tabla);

@@ -7,7 +7,7 @@
         </ul>
     </div>
     <div *ngIf="loggedIn" class="container-fluid">
-        <a class="navbar-brand">{{ config.titulo }}</a>
+        <a [routerLink]="['/dashboard']" class="navbar-brand">{{ config.titulo }}</a>
         <ul class="nav">
             <app-nav-item [menu]="config.menuin"></app-nav-item>
             <li class="nav-item">

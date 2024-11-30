@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistroTablaComponent } from './registro-tabla.component';
+import { ErrorComponent } from './error.component';
 
-describe('RegistroTablaComponent', () => {
-  let component: RegistroTablaComponent;
-  let fixture: ComponentFixture<RegistroTablaComponent>;
+describe('ErrorComponent', () => {
+  let component: ErrorComponent;
+  let fixture: ComponentFixture<ErrorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RegistroTablaComponent]
+      declarations: [ErrorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegistroTablaComponent);
+    fixture = TestBed.createComponent(ErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

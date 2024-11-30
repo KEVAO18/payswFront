@@ -54,10 +54,10 @@ export class LoginComponent {
           let joinT: string = "joinTables=usuarios&joinTables=tiposCredenciales";
 
           // condiciones para unir las tablas
-          let onC: string = "onConditions=usuarios.id=credenciales.usuarios&onConditions=credenciales.tiposCredenciales=tiposCredenciales.id";
+          let onC: string = "onConditions=usuarios.documento=credenciales.usuarios&onConditions=credenciales.tiposCredenciales=tiposCredenciales.id";
 
           // columnas a mostrar
-          let columns: string = "selectedColumns=usuarios.id as id&selectedColumns=usuarios.usuario as nombreUsuario&selectedColumns=usuarios.nombre as nombre&selectedColumns=usuarios.email as email&selectedColumns=tiposCredenciales.id as idRol";
+          let columns: string = "selectedColumns=usuarios.documento as documento&selectedColumns=usuarios.usuario as nombreUsuario&selectedColumns=usuarios.nombre as nombre&selectedColumns=usuarios.email as email&selectedColumns=tiposCredenciales.id as idRol";
 
           let where: string = "whereClause=usuarios.usuario='"+userData.valorUsuario+"'";
 

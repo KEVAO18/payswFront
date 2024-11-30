@@ -16,6 +16,8 @@ export class TablasMenuComponent {
 
   public loggedIn?: boolean;
 
+  public pk: any;
+
   constructor(private auth: SessionesService) {
 
     this.loggedIn = this.auth.isAuth();
@@ -46,7 +48,6 @@ export class TablasMenuComponent {
       } else {
 
         this.tablas = this.config.API_TABLAS.filter(tabla => (tabla.tipo != 4 && tabla.tipo != 5));
-
       }
     }
 

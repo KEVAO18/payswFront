@@ -12,6 +12,10 @@ export class GetDataByApiService {
 
   constructor(private http: HttpClient) { }
 
+  public getFkData(url: any): Observable<any> {
+    return this.http.get(url);
+  }
+
   public getData(tabla: any): Observable<any> {
     return this.http.get(this.api_url+tabla);
   }
