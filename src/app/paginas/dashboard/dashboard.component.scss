@@ -1,0 +1,51 @@
+.h-100-v {
+    height: 100vh;
+}
+
+#header {
+    background: url('../../../assets/img/ardilla.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media (min-width: 500px) {
+    .my-10-r {
+        margin-top: 10rem;
+        margin-bottom: 15rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .my-10-r {
+        margin-top: 10rem;
+        margin-bottom: 10rem;
+    }
+}
+
+.nav-link {
+    color: aliceblue;
+}
+
+.nav-link:hover {
+    color: azure;
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
+.h-card {
+    height: 100%;
+}
+
+.bg-dark-blur {
+    background: #4040409e;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.fs-1 {
+    font-size: 2rem;
+}

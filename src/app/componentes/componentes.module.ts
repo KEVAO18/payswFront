@@ -15,6 +15,7 @@ import { MostrarRegistroComponent } from './mostrar-registro/mostrar-registro.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewInsertComponent } from './new-insert/new-insert.component';
 import { InsertsModule } from './inserts/inserts.module';
+import { UpdatesComponent } from './updates/updates.component';
 
 
 
@@ -30,7 +31,8 @@ import { InsertsModule } from './inserts/inserts.module';
     LoginComponent,
     RegisterComponent,
     MostrarRegistroComponent,
-    NewInsertComponent
+    NewInsertComponent,
+    UpdatesComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { InsertsModule } from './inserts/inserts.module';
     LoginComponent,
     RegisterComponent,
     MostrarRegistroComponent,
-    NewInsertComponent
+    NewInsertComponent,
+    UpdatesComponent
   ]
 })
 export class ComponentesModule { }

@@ -33,7 +33,7 @@ export class GetDataByApiService {
   }
 
   public getOneData(tabla:any, campo:any, registro: any): Observable<any> {
-    return this.http.get(this.api_url+tabla+'/'+campo+'/'+registro);
+    return this.http.get(`${this.api_url}${tabla}/${campo}/${registro}`);
   }
 
   public getJoinData(tabla: any, joinTables: any, onConditions: any, selectedColumns: any): Observable<any> {

@@ -1,0 +1,12 @@
+<h1 class="display-5">{{ tabla }} - Actualización</h1>
+
+<form [formGroup]="form">
+    <div *ngFor="let clave of claves">
+        <div class="form-group">
+            <label for="{{ clave }}">{{ clave }}</label>
+            <input type="text" class="form-control" id="{{ clave }}" formControlName="{{ clave }}" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>

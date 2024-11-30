@@ -132,7 +132,7 @@ export class ConfigModule {
       tabla: 'credenciales', url: this.API_URL + 'credenciales', tipo: 3, col_Int: [
         {
           tablasHermanas: ['usuarios', 'tiposCredenciales'],
-          condiciones: ['usuarios.id = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
+          condiciones: ['usuarios.documento = credenciales.usuarios', 'tiposCredenciales.id = credenciales.tiposCredenciales'],
           mostrar: [
             'usuarios.usuario AS usuario',
             'tiposCredenciales.tipo AS Rol'
